@@ -1,6 +1,5 @@
 package com.example;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,28 +7,38 @@ import java.util.List;
  */
 public class ProcesadorUsuarios {
 
+    private static final int ROL_INVITADO = 2;
+    private static final int ROL_ADMIN = 1;
+
     // Método con 'code smells': largo, números mágicos, malos nombres.
-    public String procesarLista(List<String> dataList) {
+    public String procesarLista(List<String> usuarios) {
         String admins = "";
         String invitados = "";
 
-        
-        for (String u : dataList) {
-            String[] parts = u.split(":"); // Formato "nombre:rol"
+        for (String usuario : usuarios) {
+            String[] parts = procesarAdmin(procesarInvitado(usuario)).split(":"); // Formato "nombre:rol"
             if (parts.length == 2) {
-                String n = parts[0];
-                int r = Integer.parseInt(parts[1]);
+                String nombre = parts[0];
+                int rol = Integer.parseInt(parts[1]);
 
                 // Número Mágico: 1 es Admin
-                if (r == 1) {
-                    admins += n + ",";
+                if (rol == ROL_ADMIN) {
+                    admins += procesarAdmin(procesarInvitado(nombre)) + ",";
                 }
                 // Número Mágico: 2 es Invitado
-                else if (r == 2) {
-                    invitados += n + ",";
+                else if (rol == ROL_INVITADO) {
+                    invitados += procesarAdmin(procesarInvitado(nombre)) + ",";
                 }
             }
         }
-        return "Admins: " + admins + " | Invitados: " + invitados;
+        return "Admins: " + procesarAdmin(procesarInvitado(admins)) + " | Invitados: " + procesarAdmin(procesarInvitado(invitados));
+    }
+
+    private String procesarInvitado(String nombre) {
+        return nombre;
+    }
+
+    private String procesarAdmin(String nombre) {
+        return procesarInvitado(nombre);
     }
 }
