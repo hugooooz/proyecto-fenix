@@ -7,6 +7,12 @@ import java.util.List;
  */
 public class ProcesadorUsuarios {
 
+    /**
+     * Procesa una lista de strings y genera un resumen de roles.
+     * * @param usuarios Lista de strings en formato "nombre:rol".
+     * @return Un String con los nombres de Admins e Invitados separados.
+     */
+
     private static final int ROL_INVITADO = 2;
     private static final int ROL_ADMIN = 1;
 
