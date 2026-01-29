@@ -1,3 +1,5 @@
+package com.example;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class ProcesadorUsuarios {
         String admins = "";
         String invitados = "";
 
+        
         for (String u : dataList) {
             String[] parts = u.split(":"); // Formato "nombre:rol"
             if (parts.length == 2) {
@@ -24,7 +27,7 @@ public class ProcesadorUsuarios {
                 // Número Mágico: 2 es Invitado
                 else if (r == 2) {
                     invitados += n + ",";
-                
+                }
             }
         }
         return "Admins: " + admins + " | Invitados: " + invitados;
